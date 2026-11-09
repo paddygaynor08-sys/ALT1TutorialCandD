@@ -1,71 +1,143 @@
-/* styles */
-/* called by your view template */
+
+/* Modern blue and white website design */
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: helvetica, arial, sans-serif;
-  margin: 2em;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  margin: 0;
+  padding: 40px;
+  background-color: #f4f7fc;
+  color: #263449;
+  line-height: 1.6;
 }
 
+/* Main heading */
 h1 {
-  font-style: italic;
-  color: #373fff;
+  font-size: 36px;
+  font-weight: 700;
+  color: #1756a9;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
 }
 
+h2, h3 {
+  color: #174b87;
+}
+
+/* Bold text */
 .bold {
-  font-weight: bold;
+  font-weight: 700;
+  color: #174b87;
 }
 
+/* Paragraphs */
 p {
-  max-width: 600px;
+  max-width: 650px;
+  color: #53657c;
+  font-size: 16px;
+  line-height: 1.8;
 }
 
+/* Form design */
 form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: cyan;
+  margin-bottom: 30px;
+  padding: 25px;
+  background-color: #ffffff;
   display: inline-block;
   width: 100%;
-  max-width: 340px;
-  border-radius: 3px;
+  max-width: 380px;
+  border-radius: 12px;
+  border: 1px solid #e1eaf5;
+  box-shadow: 0 5px 20px rgba(23, 86, 169, 0.08);
 }
 
+/* Input fields */
 input {
   display: block;
-  margin-bottom: 10px;
-  padding: 5px;
+  margin-bottom: 15px;
+  padding: 12px 14px;
   width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
+  border: 1px solid #d5dfeb;
+  border-radius: 7px;
+  font-size: 15px;
+  background-color: #f9fbff;
+  color: #263449;
+  transition: 0.2s ease;
 }
 
+input:focus {
+  outline: none;
+  border-color: #2878d0;
+  box-shadow: 0 0 0 3px rgba(40, 120, 208, 0.12);
+  background-color: #ffffff;
+}
+
+/* Buttons */
 button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 7px;
+  background-color: #2166b5;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 3px 8px rgba(33, 102, 181, 0.2);
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 button:hover {
-  background-color: yellow;
+  background-color: #174b87;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(33, 102, 181, 0.25);
 }
 
 button:active {
+  transform: translateY(0);
   box-shadow: none;
 }
 
+/* Lists */
 li {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #40536b;
 }
 
+/* Footer */
 footer {
-  margin-top: 50px;
+  margin-top: 60px;
   padding-top: 25px;
-  border-top: 1px solid lightgrey;
+  border-top: 1px solid #dce5f0;
+  color: #718096;
+  font-size: 14px;
+}
+
+/* Links */
+a {
+  color: #2166b5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #123e70;
+  text-decoration: underline;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  form {
+    max-width: 100%;
+  }
 }
