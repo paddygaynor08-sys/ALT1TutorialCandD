@@ -1,4 +1,5 @@
 
+
 /* Modern blue and white website design */
 
 * {
@@ -39,6 +40,35 @@ p {
   color: #53657c;
   font-size: 16px;
   line-height: 1.8;
+}
+
+/* Move details closer to the subject */
+.details {
+  margin-top: 10px;
+  padding-top: 0;
+}
+
+/* Main page layout */
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+/* Main subject section */
+.subject {
+  flex: 1;
+}
+
+/* Users section on the right */
+.users {
+  width: 320px;
+  padding: 25px;
+  background-color: #ffffff;
+  border: 1px solid #e1eaf5;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(23, 86, 169, 0.08);
 }
 
 /* Form design */
@@ -89,8 +119,9 @@ button {
   transition: all 0.2s ease;
 }
 
+/* Make buttons 10% lighter when hovered */
 button:hover {
-  background-color: #174b87;
+  background-color: #4a83c3;
   transform: translateY(-2px);
   box-shadow: 0 5px 12px rgba(33, 102, 181, 0.25);
 }
@@ -127,7 +158,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Responsive design for mobile */
+/* Mobile layout */
 @media (max-width: 600px) {
   body {
     padding: 20px;
@@ -135,6 +166,14 @@ a:hover {
 
   h1 {
     font-size: 28px;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .users {
+    width: 100%;
   }
 
   form {
