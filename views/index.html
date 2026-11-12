@@ -1,54 +1,70 @@
-<!-- This is a static file --> 
 
-<!-- served from your routes in server.js --> 
-  <!DOCTYPE html> 
-<html> 
-  <head>   
-    <title>Example</title>       
-    <meta charset="utf-8" />     
-    <script src="/client.js" defer></script> 
-    <link rel="stylesheet" 
-      href="/style.css"> 
- </head> 
-  <body> 
- <header> 
-   <h1> 
-Homework Diary 
-   </h1> 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Homework Diary</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </header> 
+  <script src="/client.js" defer></script>
+  <link rel="stylesheet" href="/style.css">
+</head>
 
-    <main> 
+<body>
 
-      <h3>Add new homework:</h3> 
+  <header>
+    <h1>Homework Diary</h1>
+    <p>Keep track of your subjects, homework and deadlines.</p>
+  </header>
 
-      <form> 
+  <main class="page-layout">
 
-        <label>Subject:</label> 
-        <input id="firstName" type="text" placeholder="Maths" /> <br /><br /> 
-        <label>Details:</label> 
+    <section class="form-panel">
+      <h2>Add New Homework</h2>
+      <p>Enter your homework details below.</p>
 
-        <input id="surName" type="text" placeholder="Trig" /> <br /><br /> 
-        <!-- REALLY IMPORTANT to get this to work!! --> 
-        <!-- Error in the sample code from JE... missing id="submit-btn" HOK --> 
+      <form id="homework-form">
 
-        <button id="submit-btn" type="submit">Submit</button> 
-        <!-- found on w3school --> 
-        <!--<button id="myBtn" type="button" value="Submit">Submit</button> --> 
-      </form> 
+        <div class="form-group">
+          <label for="subject">Subject:</label>
+          <input id="subject" type="text"
+            placeholder="e.g. Maths" required>
+        </div>
 
-      <!-- TUTORIAL D --> 
+        <div class="form-group">
+          <label for="details">Details:</label>
+          <input id="details" type="text"
+            placeholder="e.g. Complete questions 1-5" required>
+        </div>
 
-      <p>Users:</p> 
+        <div class="form-group">
+          <label for="dueDate">Due Date:</label>
+          <input id="dueDate" type="date" required>
+        </div>
 
-      <section> 
+        <button id="submit-btn" type="submit">
+          Add Homework
+        </button>
 
-        <ul id="users"></ul> 
+        <p id="message" aria-live="polite"></p>
 
-      </section> 
+      </form>
+    </section>
 
-    </main> 
+    <section class="homework-panel">
+      <h2>Your Homework</h2>
+      <p>All your saved homework will appear here.</p>
 
-  </body> 
+      <ul id="users"></ul>
+    </section>
 
-</html> 
+  </main>
+
+  <footer>
+    <p>Homework Diary | Stay organised and meet your deadlines.</p>
+  </footer>
+
+</body>
+</html>
+
+
