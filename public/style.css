@@ -15,71 +15,86 @@ body {
 }
 
 /* Main heading */
-header {
-  margin-bottom: 25px;
-}
-
 h1 {
   font-size: 36px;
   font-weight: 700;
   color: #1756a9;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
 }
 
 h2, h3 {
   color: #174b87;
 }
 
+/* Bold text */
+.bold {
+  font-weight: 700;
+  color: #174b87;
+}
+
+/* Paragraphs */
 p {
+  max-width: 650px;
   color: #53657c;
   font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Move details closer to the subject */
+.details {
+  margin-top: 10px;
+  padding-top: 0;
 }
 
 /* Main page layout */
-.page-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 30px;
-  align-items: start;
 }
 
-/* Form and homework boxes */
-.form-panel,
-.homework-panel {
-  background-color: #ffffff;
+/* Main subject section */
+.subject {
+  flex: 1;
+}
+
+/* Users section on the right */
+.users {
+  width: 320px;
   padding: 25px;
+  background-color: #ffffff;
+  border: 1px solid #e1eaf5;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(23, 86, 169, 0.08);
+}
+
+/* Form design */
+form {
+  margin-bottom: 30px;
+  padding: 25px;
+  background-color: #ffffff;
+  display: inline-block;
+  width: 100%;
+  max-width: 380px;
   border-radius: 12px;
   border: 1px solid #e1eaf5;
   box-shadow: 0 5px 20px rgba(23, 86, 169, 0.08);
 }
 
-/* Keep form details closer together */
-form {
-  margin-top: 20px;
-  width: 100%;
-}
-
-.form-group {
-  margin-bottom: 14px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: #174b87;
-  font-weight: 600;
-}
-
 /* Input fields */
 input {
   display: block;
-  width: 100%;
+  margin-bottom: 15px;
   padding: 12px 14px;
+  width: 100%;
   border: 1px solid #d5dfeb;
   border-radius: 7px;
   font-size: 15px;
   background-color: #f9fbff;
   color: #263449;
+  transition: 0.2s ease;
 }
 
 input:focus {
@@ -103,63 +118,47 @@ button {
   transition: all 0.2s ease;
 }
 
-/* 10% lighter on hover */
+/* Make buttons 10% lighter when hovered */
 button:hover {
-  background-color: #3677bd;
+  background-color: #4a83c3;
   transform: translateY(-2px);
   box-shadow: 0 5px 12px rgba(33, 102, 181, 0.25);
 }
 
 button:active {
   transform: translateY(0);
+  box-shadow: none;
 }
 
-/* Homework list */
-#users {
-  padding-left: 0;
-  list-style: none;
-}
-
-#users li {
-  background-color: #f4f7fc;
-  border: 1px solid #e1eaf5;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 12px;
+/* Lists */
+li {
+  margin-bottom: 8px;
   color: #40536b;
-}
-
-#users li strong {
-  color: #174b87;
-  display: block;
-  font-size: 17px;
-}
-
-.due-date {
-  display: block;
-  margin-top: 7px;
-  font-size: 14px;
-  color: #2166b5;
-  font-weight: 600;
-}
-
-/* Status message */
-#message {
-  margin-top: 12px;
-  font-size: 14px;
 }
 
 /* Footer */
 footer {
-  margin-top: 50px;
-  padding-top: 20px;
+  margin-top: 60px;
+  padding-top: 25px;
   border-top: 1px solid #dce5f0;
   color: #718096;
   font-size: 14px;
 }
 
+/* Links */
+a {
+  color: #2166b5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #123e70;
+  text-decoration: underline;
+}
+
 /* Mobile layout */
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   body {
     padding: 20px;
   }
@@ -168,7 +167,17 @@ footer {
     font-size: 28px;
   }
 
-  .page-layout {
-    grid-template-columns: 1fr;
+  .main-content {
+    flex-direction: column;
+  }
+
+  .users {
+    width: 100%;
+  }
+
+  form {
+    max-width: 100%;
   }
 }
+
+ 
