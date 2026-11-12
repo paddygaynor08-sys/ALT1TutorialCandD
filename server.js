@@ -11,7 +11,7 @@ app.use(express.static('public'));
 //from chatgpt on 2/10/2025 so that can see what's stored in SQLite d/b on render server.
 // Debug route: show all data in your table
 app.get("/show-data", (req, res) => {
-  db.all("SELECT * FROM person", [], (err, rows) => {
+  db.all("SELECT * FROM homework", [], (err, rows) => {
     if (err) {
       console.error("DB error:", err.message);
       res.status(500).send("Database error");
@@ -44,7 +44,7 @@ app.post("/putData", function (request, response) {
 console.log("In app.post (/putData)");
 // build up insert statement. For example:
 // insert into person(first_name, surname) values ('Joe', 'Bloggs')
-let insStr = "insert into person(first_name, surname) values (";
+let insStr = "insert into homework(subject, details) values (";
 insStr = insStr + "\'"+request.body.fname+"\', ";
 insStr = insStr + "\'"+request.body.sname+"\') ";
 db.run(insStr);
@@ -53,7 +53,7 @@ db.run(insStr);
 // Process the HTTP GET request for /getData
 app.get('/getData', function(request, response) {
 console.log("In app.get (/getData)");
-db.all('SELECT * from person', function(err, rows) {
+db.all('SELECT * from homework', function(err, rows) {
 response.send(JSON.stringify(rows));
 });
 });
