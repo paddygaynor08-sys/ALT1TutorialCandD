@@ -1,59 +1,122 @@
-console.log("Server log - start again");
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-// Not sure that the next 3 lines are actually needed
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // for parsing application/json
-app.use(express.static('public'));
 
+console.log("Homework Diary started");
 
-//from chatgpt on 2/10/2025 so that can see what's stored in SQLite d/b on render server.
-// Debug route: show all data in your table
-app.get("/show-data", (req, res) => {
-  db.all("SELECT * FROM homework", [], (err, rows) => {
-    if (err) {
-      console.error("DB error:", err.message);
-      res.status(500).send("Database error");
-      return;
+// Get the form and button
+const form = document.getElementById("homework-form");
+const message = document.getElementById("message");
+
+// Listen for form submission
+form.addEventListener("submit", submitDataToServer);
+
+// Submit homework to the server
+async function submitDataToServer(event) {
+
+  event.preventDefault();
+
+  // Collect the information
+  const dataObj = {
+    subject: document.getElementById("subject").value.trim(),
+    details: document.getElementById("details").value.trim(),
+    dueDate: document.getElementById("dueDate").value
+  };
+
+  if (!dataObj.subject || !dataObj.details || !dataObj.dueDate) {
+    message.textContent = "Please complete all fields.";
+    return;
+  }
+
+  try {
+    const response = await fetch("/putData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dataObj)
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not save homework");
     }
-    res.json(rows); // Send back all rows as JSON
+
+    message.textContent = "Homework added successfully!";
+    form.reset();
+
+    // Refresh the homework list
+    getDataFromServer();
+
+  } catch (error) {
+    console.error(error);
+    message.textContent = "There was a problem saving your homework.";
+  }
+}
+
+
+// Get the homework from the database
+async function getDataFromServer() {
+
+  try {
+    const response = await fetch("/getData");
+
+    if (!response.ok) {
+      throw new Error("Could not load homework");
+    }
+
+    const homework = await response.json();
+
+    displayData(homework);
+
+  } catch (error) {
+    console.error(error);
+    message.textContent = "Could not load your homework.";
+  }
+}
+
+
+// Display homework on the page
+function displayData(homework) {
+
+  const rowList = document.getElementById("users");
+
+  rowList.innerHTML = "";
+
+  if (homework.length === 0) {
+    const emptyMessage = document.createElement("li");
+    emptyMessage.textContent = "No homework added yet.";
+    rowList.appendChild(emptyMessage);
+    return;
+  }
+
+  homework.forEach(function(row) {
+
+    const newListItem = document.createElement("li");
+
+    const subject = document.createElement("strong");
+    subject.textContent = row.subject;
+
+    const details = document.createElement("div");
+    details.textContent = row.details;
+
+    const dueDate = document.createElement("span");
+    dueDate.className = "due-date";
+
+    if (row.due_date) {
+      const dateParts = row.due_date.split("-");
+      dueDate.textContent =
+        "Due: " + dateParts[2] + "/" +
+        dateParts[1] + "/" + dateParts[0];
+    } else {
+      dueDate.textContent = "No due date";
+    }
+
+    newListItem.appendChild(subject);
+    newListItem.appendChild(details);
+    newListItem.appendChild(dueDate);
+
+    rowList.appendChild(newListItem);
+
   });
-});
+}
 
 
-
-// This is called when the app is first started
-app.get('/', function(request, response) {
-console.log("In app.get (/)");
-response.sendFile(__dirname + '/views/index.html');
-});
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
-console.log('Your app is listening on port ' +
-listener.address().port);
-});
-
-// Create the database object
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('SQLite.db'); // database name
-
-
-// Process the HTTP POST request for /putData
-app.post("/putData", function (request, response) {
-console.log("In app.post (/putData)");
-// build up insert statement. For example:
-// insert into person(first_name, surname) values ('Joe', 'Bloggs')
-let insStr = "insert into homework(subject, details) values (";
-insStr = insStr + "\'"+request.body.fname+"\', ";
-insStr = insStr + "\'"+request.body.sname+"\') ";
-db.run(insStr);
-});
-
-// Process the HTTP GET request for /getData
-app.get('/getData', function(request, response) {
-console.log("In app.get (/getData)");
-db.all('SELECT * from homework', function(err, rows) {
-response.send(JSON.stringify(rows));
-});
-});
+// Load homework when the page opens
+getDataFromServer();
