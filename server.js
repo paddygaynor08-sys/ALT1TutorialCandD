@@ -1,122 +1,43 @@
+console.log("Server log - start again"); 
 
-console.log("Homework Diary started");
+var express = require('express'); 
 
-// Get the form and button
-const form = document.getElementById("homework-form");
-const message = document.getElementById("message");
+var bodyParser = require('body-parser'); 
 
-// Listen for form submission
-form.addEventListener("submit", submitDataToServer);
+var app = express(); 
 
-// Submit homework to the server
-async function submitDataToServer(event) {
+// Not sure that the next 3 lines are actually needed 
 
-  event.preventDefault();
+app.use(bodyParser.urlencoded({ extended: true })); 
 
-  // Collect the information
-  const dataObj = {
-    subject: document.getElementById("subject").value.trim(),
-    details: document.getElementById("details").value.trim(),
-    dueDate: document.getElementById("dueDate").value
-  };
+app.use(bodyParser.json()); // for parsing application/json 
 
-  if (!dataObj.subject || !dataObj.details || !dataObj.dueDate) {
-    message.textContent = "Please complete all fields.";
-    return;
-  }
+app.use(express.static('public')); 
 
-  try {
-    const response = await fetch("/putData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(dataObj)
-    });
+  
 
-    if (!response.ok) {
-      throw new Error("Could not save homework");
-    }
+  
 
-    message.textContent = "Homework added successfully!";
-    form.reset();
+//from chatgpt on 2/10/2025 so that can see what's stored in SQLite d/b on render server. 
 
-    // Refresh the homework list
-    getDataFromServer();
+// Debug route: show all data in your table 
 
-  } catch (error) {
-    console.error(error);
-    message.textContent = "There was a problem saving your homework.";
-  }
-}
+app.get("/show-data", (req, res) => { 
 
+  db.all("SELECT * FROM homework", [], (err, rows) => { 
 
-// Get the homework from the database
-async function getDataFromServer() {
+    if (err) { 
 
-  try {
-    const response = await fetch("/getData");
+      console.error("DB error:", err.message); 
 
-    if (!response.ok) {
-      throw new Error("Could not load homework");
-    }
+      res.status(500).send("Database error"); 
 
-    const homework = await response.json();
+      return; 
 
-    displayData(homework);
+    } 
 
-  } catch (error) {
-    console.error(error);
-    message.textContent = "Could not load your homework.";
-  }
-}
+    res.json(rows); // Send back all rows as JSON 
 
+  }); 
 
-// Display homework on the page
-function displayData(homework) {
-
-  const rowList = document.getElementById("users");
-
-  rowList.innerHTML = "";
-
-  if (homework.length === 0) {
-    const emptyMessage = document.createElement("li");
-    emptyMessage.textContent = "No homework added yet.";
-    rowList.appendChild(emptyMessage);
-    return;
-  }
-
-  homework.forEach(function(row) {
-
-    const newListItem = document.createElement("li");
-
-    const subject = document.createElement("strong");
-    subject.textContent = row.subject;
-
-    const details = document.createElement("div");
-    details.textContent = row.details;
-
-    const dueDate = document.createElement("span");
-    dueDate.className = "due-date";
-
-    if (row.due_date) {
-      const dateParts = row.due_date.split("-");
-      dueDate.textContent =
-        "Due: " + dateParts[2] + "/" +
-        dateParts[1] + "/" + dateParts[0];
-    } else {
-      dueDate.textContent = "No due date";
-    }
-
-    newListItem.appendChild(subject);
-    newListItem.appendChild(details);
-    newListItem.appendChild(dueDate);
-
-    rowList.appendChild(newListItem);
-
-  });
-}
-
-
-// Load homework when the page opens
-getDataFromServer();
+}); 
