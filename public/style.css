@@ -1,9 +1,4 @@
 
-/* =========================
-   HOMEWORK DIARY
-   Clean, modern design
-========================= */
-
 * {
   box-sizing: border-box;
 }
@@ -18,7 +13,6 @@ body {
 }
 
 /* Main heading */
-
 header {
   max-width: 1180px;
   margin: 0 auto 30px;
@@ -30,7 +24,6 @@ h1 {
   margin: 0 0 6px;
   letter-spacing: -0.7px;
 }
-
 header p {
   color: #718096;
   margin: 0;
@@ -38,7 +31,6 @@ header p {
 }
 
 /* Two-column layout */
-
 .page-layout {
   max-width: 1180px;
   margin: 0 auto;
@@ -49,7 +41,6 @@ header p {
 }
 
 /* Left and right panels */
-
 .form-panel,
 .homework-panel {
   background: #ffffff;
@@ -73,7 +64,6 @@ h2 {
 }
 
 /* Homework form */
-
 form {
   width: 100%;
   margin: 0;
@@ -86,7 +76,6 @@ form {
 .form-group {
   margin-bottom: 16px;
 }
-
 label {
   display: block;
   font-size: 14px;
@@ -94,7 +83,6 @@ label {
   color: #40536b;
   margin-bottom: 6px;
 }
-
 input {
   display: block;
   width: 100%;
@@ -112,7 +100,6 @@ input:focus {
 }
 
 /* Add homework button */
-
 button {
   width: 100%;
   padding: 11px;
