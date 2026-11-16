@@ -180,4 +180,70 @@ a:hover {
   }
 }
 
+/* Two-column homework layout */
+
+.page-layout {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 45px;
+  align-items: start;
+  width: 100%;
+  margin-top: 25px;
+}
+
+/* Left side - homework form */
+
+.form-panel {
+  width: 100%;
+}
+
+.form-panel form {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Right side - saved homework */
+
+.homework-panel {
+  background: white;
+  padding: 25px;
+  border: 1px solid #e1eaf5;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(23, 86, 169, 0.08);
+  min-height: 250px;
+  width: 100%;
+}
+
+#users {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#users li {
+  background: #f4f7fc;
+  border: 1px solid #e1eaf5;
+  border-radius: 7px;
+  padding: 15px;
+  margin-bottom: 12px;
+  color: #263449;
+}
+
+/* Mobile layout */
+
+@media (max-width: 750px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .form-panel form {
+    max-width: 100%;
+  }
+
+  .homework-panel {
+    width: 100%;
+  }
+}
+
  
